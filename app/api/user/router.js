@@ -13,4 +13,14 @@ module.exports = (router) => {
     await validator.update(req)
     await controller.update(req, res)
   })
+  router.get('/user/:id/notes', async (req, res) => {
+    await auth.requiresCurrentUser(req)
+    await controller.readUserNotes(req, res)
+  })
+  router.post('/note', async (req, res) => {
+    await auth.requiresLogin(req)
+    await controller.createUserNote(req, res)
+  })
+
+
 }

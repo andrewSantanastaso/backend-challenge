@@ -17,8 +17,10 @@ describe('api', () => {
 
             before(async () => {
                 validUser = await mockData.mockAuthAndUser()
+                console.log('Valid User for Notes Test:', validUser)
 
             })
+
 
             it('should allow a logged-in user to read their notes', async () => {
                 //create some notes for the user
@@ -58,7 +60,8 @@ describe('api', () => {
 
                 should.exist(notes)
                 notes.should.be.an.Array()
-                console.log('Retrieved Notes:', notes)
+                notes.length.should.be.equal(2)
+
 
 
 

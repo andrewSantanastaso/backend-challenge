@@ -14,10 +14,12 @@ describe('api', () => {
     describe('user', () => {
         describe('read-user-notes', () => {
             let validUser
+            let invalidUser
 
             before(async () => {
                 validUser = await mockData.mockAuthAndUser()
-                console.log('Valid User for Notes Test:', validUser)
+                invalidUser = await mockData.mockAuthAndUser()
+
 
             })
 
@@ -72,7 +74,8 @@ describe('api', () => {
                 await agent
                     .client()
                     .get(`/user/${validUser.user}/notes`)
-                    .expect(401)
+                    .set('authorization', invalidUser.token)
+                    .expect(403)
                     .promise()
             })
         })
